@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/robjporter/GO-TermColors"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 type MenuItem struct {
@@ -235,6 +237,30 @@ func (m *Menu) RunInternal() (results []string, escape bool) {
 			m.CursorUp()
 		}
 	}
+}
+
+func GetSecret(message string, defaultText string) string {
+	fmt.Printf("%s", termcolors.Color(termcolors.Bold(message), termcolors.GREEN))
+
+	if defaultText != "" {
+		fmt.Printf(" %s%s%s",
+			termcolors.Color(termcolors.Bold("["), termcolors.GREEN),
+			termcolors.Color(defaultText, termcolors.YELLOW),
+			termcolors.Color(termcolors.Bold("]"), termcolors.GREEN))
+	}
+
+	fmt.Printf("%s ", termcolors.Color(termcolors.Bold(":"), termcolors.GREEN))
+
+	bytePassword, err := terminal.ReadPassword(0)
+	if err == nil {
+		text = strings.TrimSpace(string(bytePassword))
+	}
+
+	if text == "" {
+		text = defaultText
+	}
+
+	return text
 }
 
 func GetText(message string, defaultText string) string {
