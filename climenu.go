@@ -242,9 +242,9 @@ func GetText(message string, defaultText string) string {
 
 	if defaultText != "" {
 		fmt.Printf(" %s%s%s",
-			goterm.Color(termcolors.Bold("["), termcolors.GREEN),
-			goterm.Color(defaultText, termcolors.YELLOW),
-			goterm.Color(termcolors.Bold("]"), termcolors.GREEN))
+			termcolors.Color(termcolors.Bold("["), termcolors.GREEN),
+			termcolors.Color(defaultText, termcolors.YELLOW),
+			termcolors.Color(termcolors.Bold("]"), termcolors.GREEN))
 	}
 
 	fmt.Printf("%s ", termcolors.Color(termcolors.Bold(":"), termcolors.GREEN))
