@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/buger/goterm"
+	"github.com/robjporter/GO-TermColors"
 )
 
 type MenuItem struct {
@@ -129,7 +129,7 @@ func (m *Menu) DrawMenuItems(redraw bool) {
 		}
 
 		if index == m.CursorPos {
-			cursor := goterm.Color("> ", goterm.CYAN)
+			cursor := termcolors.Color("> ", termcolors.CYAN)
 			fmt.Printf("\r%s%s %s%s", cursor, prefix, menuItem.Text, newline)
 		} else {
 			fmt.Printf("\r%s%s %s%s", "  ", prefix, menuItem.Text, newline)
@@ -142,7 +142,7 @@ func (m *Menu) Render() {
 		fmt.Println(m.Heading)
 	}
 
-	fmt.Printf("%s\n", goterm.Color(goterm.Bold(m.Question)+":", goterm.GREEN))
+	fmt.Printf("%s\n", termcolors.Color(termcolors.Bold(m.Question)+":", termcolors.GREEN))
 
 	m.DrawMenuItems(false)
 
@@ -238,16 +238,16 @@ func (m *Menu) RunInternal() (results []string, escape bool) {
 }
 
 func GetText(message string, defaultText string) string {
-	fmt.Printf("%s", goterm.Color(goterm.Bold(message), goterm.GREEN))
+	fmt.Printf("%s", termcolors.Color(termcolors.Bold(message), termcolors.GREEN))
 
 	if defaultText != "" {
 		fmt.Printf(" %s%s%s",
-			goterm.Color(goterm.Bold("["), goterm.GREEN),
-			goterm.Color(defaultText, goterm.YELLOW),
-			goterm.Color(goterm.Bold("]"), goterm.GREEN))
+			goterm.Color(termcolors.Bold("["), termcolors.GREEN),
+			goterm.Color(defaultText, termcolors.YELLOW),
+			goterm.Color(termcolors.Bold("]"), termcolors.GREEN))
 	}
 
-	fmt.Printf("%s ", goterm.Color(goterm.Bold(":"), goterm.GREEN))
+	fmt.Printf("%s ", termcolors.Color(termcolors.Bold(":"), termcolors.GREEN))
 
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
