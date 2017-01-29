@@ -251,6 +251,7 @@ func GetSecret(message string, defaultText string) string {
 
 	fmt.Printf("%s ", termcolors.Color(termcolors.Bold(":"), termcolors.GREEN))
 
+	text := ""
 	bytePassword, err := terminal.ReadPassword(0)
 	if err == nil {
 		text = strings.TrimSpace(string(bytePassword))
